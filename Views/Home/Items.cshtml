@@ -1,0 +1,25 @@
+﻿@model List<EAD_MVC4.Models.Item>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Items";
+}
+
+<div>
+    <div style="margin-left:30px">
+        <img src="~/images/new_item.png" />
+        <div>
+            @for (int i = 0; i < Model.Count(); i++)
+                {
+                    <div style="margin:50px; padding:10px; color:yellow; background-color:black; width:200px; height:300px; float:left">
+                        <div style="float:left;">
+                            <img src ="@Model[i].image" width="180" height="180" />
+                        </div>
+                        <div style="margin:10px; padding:10px;">
+                            <h4>@Model[i].name</h4>
+                        </div>
+                    </div>
+                }
+        </div>
+    </div>
+    
+</div>

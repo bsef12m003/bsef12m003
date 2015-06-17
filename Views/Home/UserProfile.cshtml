@@ -1,0 +1,130 @@
+﻿@model List<EAD_MVC4.Models.User>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "UserProfile";
+}
+
+@if (Model.Count() == 0)
+{
+    Response.Redirect("../Home/Index");
+                
+}
+
+@if (Model[0].type.Equals("admin"))
+{
+    Response.Redirect("../Admin/MakePost");
+                
+}
+
+<link href="boostrap/bootstrap.css" rel="stylesheet" />
+    <script src="boostrap/bootstrap.js"> </script>
+
+
+
+<div>
+    @*<nav class="navbar navbar-inverse" role="navigation">
+        <div>
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#"><img src="~/images/profile_03.png" /></a></li>
+                <li><a href="#"><img src="~/images/profile_06.png" /></a></li>
+                <li><a href="#"><img src="~/images/profile_08.png" /></a></li>
+                
+            </ul>
+            
+        </div>
+     </nav>*@
+    
+    <div class="pull-right">
+        <div>
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" />
+                </div>
+                <button type="submit" class="btn btn-defaul">Submit</button>
+            </form>
+        </div>
+
+        <div style="margin-right:30px">
+            <div style="background-image:url(~/images/profile_14.png); width:298px; height:75px; margin-top:170px">
+                <img src="~/images/profile_14.png" />
+            </div>
+            <div style="background-color:black; width:302px; height:auto; margin-top:70px;">
+                @foreach (var i in ViewBag.nfeed)
+                {
+                    <div style="margin-bottom:20px; color:yellow; background-color:black; width:280px; height:auto; float:left">
+                        @*<div style="float:left;">
+                            
+                        </div>*@
+                        <div style="margin:10px; padding:10px;">
+                            <p>@i.discription</p>
+                            <p style="font-size:12px">@i.date</p>
+                    
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+    
+    <div style="margin-left:30px;">
+        <div style="background-color:black; color:yellow; width:720px; height:540px;">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <div style="margin-left:50px; padding-top:50px; margin-right:50px">
+                    <div style="float:left;">
+                        <img src ="@Model[i].image" width="100" height="128" style ="min-height:25px ; min-width:25px" />
+                    </div>
+                    <div style="padding-left:30px; padding-right:30px;">
+                        <h3>@Model[i].fname @Model[i].lname</h3>
+                        <p>@Model[i].gender</p>
+                        <p>@*@Model[i].country*@</p>
+                        <br />
+                        <br />
+                        <br />
+
+                        <div>
+                            <form class="navbar-form navbar-center" action="\Home\savePost" method="post" enctype="multipart/form-data" id="userForm">
+
+                                <h1>Make Post</h1>
+                            <div class="row c2">
+                                <div class="cell cellLeft">Discription</div>
+                                <div class="cell cellRight">
+                                <textarea id="discription" name="desc" class="streetAddress1"></textarea><span></span>
+                                </div>
+	                            <div class="clearBox">
+                                    <input class="btn btn-default" type="submit" value="Post" />
+	                            </div>
+                            </div>
+
+
+                            </form>
+
+                        </div>
+                    
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div style="margin-top:150px">
+            <img src="~/images/profile_18.png" />
+            <div>
+                @foreach (var i in ViewBag.upost)
+                {
+                    <div style="margin-bottom:20px; color:yellow; background-color:black; width:720px; height:auto; float:left">
+                        @*<div style="float:left;">
+                            
+                        </div>*@
+                        <div style="margin:10px; padding:10px;">
+                            <p>@i.discription</p>
+                            <p style="font-size:12px">@i.date</p>
+                    
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+ </div>

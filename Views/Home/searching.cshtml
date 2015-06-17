@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "searching";
+}
+
+
+@model EAD_MVC4.Models.UserPost
+<h2>searching</h2>
+
+User Name : <input type ="text" name ="uNAme" id ="uNAme" placeholder ="First Name" style="margin-left:20px;margin-bottom:10px" /><br />
+<input type ="Button" id ="search" value ="Search" style ="text-align:left;margin-left:80px;margin-bottom:10px" />
+
+
+<script>
+    $("#search").click(function () {
+        var uName = $("#uNAme").val();
+        
+        $.getJSON("/Home/search?userName="+uName ).done(function (data) {
+            $('table').empty();
+            $('#table').append(' <tr> <td style ="padding:6px"> Description</td > <td style ="padding:6px">Time</td><td style ="padding:6px">Date</td>  </tr>');
+            for (var i = 0; i < data.length; i++) {
+                $('#table').append('<tr> <td style ="padding:6px">' + data[i].discription + '</td>        <td style ="padding:6px">' + data[i].time + '</td> <td style ="padding:6px">' + data[i].date + '</td> </tr>');
+            }
+           
+        }).fail(function (jqxhr, textStatus, error) {
+            alert('Error =' + error);
+        })
+    });
+</script>
+
+<div id ="SearchTable">
+    <table id ="table" border ="1" style ="padding:6px">
+        
+    </table>
+</div>
